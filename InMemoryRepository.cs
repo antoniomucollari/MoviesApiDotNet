@@ -19,4 +19,9 @@ public class InMemoryRepository
     {
         return _genres;
     }
+
+    public async Task<List<Genre>> GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

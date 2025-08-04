@@ -7,12 +7,13 @@ builder.Services.AddOutputCache(options =>
     options.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(15);
 });
 var app = builder.Build();
-app.UseOutputCache();
-app.MapControllers();
-if (app.Environment.IsDevelopment())
+
+if (app.Environment.IsDevelopment()) //this is a middleware
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseOutputCache();
+app.UseHttpsRedirection();
+app.MapControllers();
 app.Run();

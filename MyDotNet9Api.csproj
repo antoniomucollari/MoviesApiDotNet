@@ -6,9 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!-- The ItemGroup for Swagger/OpenAPI packages is now empty or removed -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <!-- Keep other packages here if you have them, e.g.: -->
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore" Version=".." /> -->
   </ItemGroup>
 
 </Project>
