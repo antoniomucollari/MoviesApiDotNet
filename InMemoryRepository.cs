@@ -2,7 +2,7 @@
 
 namespace MyDotNet9Api;
 
-public class InMemoryRepository
+public class InMemoryRepository:IRepository
 {
     private List<Genre> _genres;
 
@@ -23,5 +23,10 @@ public class InMemoryRepository
     public async Task<List<Genre>> GetById(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public bool Exist(string name)
+    {
+        return _genres.Any(g => g.Name == name);
     }
 }

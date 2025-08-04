@@ -6,7 +6,6 @@ C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\MyDotNet9
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\MyDotNet9Api.runtimeconfig.json
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\MyDotNet9Api.dll
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\MyDotNet9Api.pdb
-C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\obj\Debug\net9.0\MyDotNet9Api.csproj.AssemblyReference.cache
 C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\obj\Debug\net9.0\rpswa.dswa.cache.json
@@ -68,3 +67,4 @@ C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\obj\Debug\net9.0
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\obj\Debug\net9.0\MyDotNet9Api.pdb
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\obj\Debug\net9.0\MyDotNet9Api.genruntimeconfig.cache
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\obj\Debug\net9.0\ref\MyDotNet9Api.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\obj\Debug\net9.0\MyDotNet9Api.sourcelink.json

@@ -7,6 +7,11 @@ namespace MyDotNet9Api.Controllers;
 [Route("api/[controller]")]
 public class GenreController : ControllerBase
 {
+    private readonly IRepository _repository;
+    public GenreController(IRepository repository)
+    {
+        _repository = repository;
+    }
     [HttpGet]
     public List<Genre> GetAll()
     {
@@ -37,6 +42,10 @@ public class GenreController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Genre>> Post([FromBody] Genre genre)
     {
+        var genreWithSameNameExists = _repository.Exist(genre.Name);
+        if (genreWithSameNameExists)
+        {
+            return BadRequest("Threre is already a genre with that name.");}
         genre.Id = 5;
         return genre;
     }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj": {}
+    "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj": {
+    "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+        "projectUniqueName": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
         "projectName": "MyDotNet9Api",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\obj\\",
+        "projectPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+        "packagesPath": "C:\\Users\\antonio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\antonio\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\anton\\.dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
