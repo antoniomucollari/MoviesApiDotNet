@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.EntityFrameworkCore;
 using MyDotNet9Api.DTOs;
 using MyDotNet9Api.Entities;
+using MyDotNet9Api.Utilities;
 
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
@@ -20,13 +23,14 @@ public class GenreController : ControllerBase
         _context = context;
         _mapper = mapper;
     }
-    // [HttpGet]
-    // [OutputCache(Tags = [cacheTag])]
-    // public List<Genre> GetAll()
-    // {
-    //     // return _repository.GetAll();
-    //     return new List<Genre> { new Genre { Id = 1, Name = "Drama" }, new Genre { Id = 2, Name = "Action" } };
-    // }
+    [HttpGet]
+    [OutputCache(Tags = [cacheTag])]
+    public async Task<List<GenreDTO>> GetAll([FromQuery] PaginationDTO pagination)
+    {
+        var queryable = _context.Genres;
+        await HttpContext.InsertPaginationParameterHeader(queryable);
+        return await queryable.OrderBy(g=> g.Name).Paginate(pagination).ProjectTo<GenreDTO>(_mapper.ConfigurationProvider).ToListAsync();
+    }
     
     [HttpGet("{id}", Name="GetGenreById")]
     [OutputCache(Tags = [cacheTag])]
