@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using MyDotNet9Api.DTOs;
 using MyDotNet9Api.Entities;
 
 namespace MyDotNet9Api.Controllers;
@@ -7,46 +9,51 @@ namespace MyDotNet9Api.Controllers;
 [Route("api/[controller]")]
 public class GenreController : ControllerBase
 {
-    private readonly IRepository _repository;
-    public GenreController(IRepository repository)
+    private const string cacheTag = "genres";
+    private readonly IOutputCacheStore _outputCacheStore;
+    private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
+
+    public GenreController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, IMapper mapper)
     {
-        _repository = repository;
+        _outputCacheStore = outputCacheStore;
+        _context = context;
+        _mapper = mapper;
     }
-    [HttpGet]
-    public List<Genre> GetAll()
-    {
-        var repo = new InMemoryRepository();
-        var genres = repo.GetAll();
-        return genres;
-    }
-    [HttpGet("{id}")]
-    [OutputCache]
+    // [HttpGet]
+    // [OutputCache(Tags = [cacheTag])]
+    // public List<Genre> GetAll()
+    // {
+    //     // return _repository.GetAll();
+    //     return new List<Genre> { new Genre { Id = 1, Name = "Drama" }, new Genre { Id = 2, Name = "Action" } };
+    // }
+    
+    [HttpGet("{id}", Name="GetGenreById")]
+    [OutputCache(Tags = [cacheTag])]
     public async Task<ActionResult<Genre>> Get(int id)
     {
-        var repo = new InMemoryRepository();
-        var genres = await repo.GetById(id);
-        if (genres is null)
-        {
-            return NotFound("Not Found");
-        }
-        return Ok(genres);
-    }
-    
-    [HttpGet("{name}")]
-    [OutputCache]
-    public async Task<ActionResult<Genre>> Get(string name, [FromQuery] int id)
-    {
-        return new Genre { Id = id, Name = name };
+        throw new InvalidOperationException();
     }
     
     [HttpPost]
-    public async Task<ActionResult<Genre>> Post([FromBody] Genre genre)
+    public async Task<CreatedAtRouteResult> Post([FromBody] GenreCreationDTO genreCreationDTO)
     {
-        var genreWithSameNameExists = _repository.Exist(genre.Name);
-        if (genreWithSameNameExists)
-        {
-            return BadRequest("Threre is already a genre with that name.");}
-        genre.Id = 5;
-        return genre;
+        var genre = _mapper.Map<Genre>(genreCreationDTO);
+        _context.Genres.Add(genre);
+        await _context.SaveChangesAsync();
+        await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
+        var genreDTO = _mapper.Map<GenreDTO>(genre);
+        return new CreatedAtRouteResult("GetGenreById", new { id = genreDTO.Id }, genreDTO);
+    }
+
+    [HttpPut]
+    public void Put()
+    {
+        
+    }
+    [HttpDelete]
+    public void Delete()
+    {
+        
     }
 }
