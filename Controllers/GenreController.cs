@@ -15,7 +15,7 @@ public class GenreController : ControllerBase
     private const string cacheTag = "genres";
     private readonly IOutputCacheStore _outputCacheStore;
     private readonly ApplicationDbContext _context;
-    private readonly IMapper _mapper;
+    private readonly IMapper _mapper; 
 
     public GenreController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, IMapper mapper)
     {
@@ -34,9 +34,16 @@ public class GenreController : ControllerBase
     
     [HttpGet("{id}", Name="GetGenreById")]
     [OutputCache(Tags = [cacheTag])]
-    public async Task<ActionResult<Genre>> Get(int id)
+    public async Task<ActionResult<GenreDTO>> Get(int id)
     {
-        throw new InvalidOperationException();
+        var genre = await _context.Genres
+            .ProjectTo<GenreDTO>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(g=> g.Id== id);
+        if (genre == null)
+        {
+            return NotFound();
+        }
+        return genre;
     }
     
     [HttpPost]
@@ -50,14 +57,31 @@ public class GenreController : ControllerBase
         return new CreatedAtRouteResult("GetGenreById", new { id = genreDTO.Id }, genreDTO);
     }
 
-    [HttpPut]
-    public void Put()
+    [HttpPut ("{id:int}")]
+    public async Task<IActionResult> Put(int id, [FromBody] GenreCreationDTO genreCreationDTO)
     {
-        
+        var genreExists = await _context.Genres.AnyAsync(g => g.Id == id);
+        if (!genreExists)
+        {
+            return NotFound();
+        }
+        var genre =  _mapper.Map<Genre>(genreCreationDTO);
+        genre.Id = id;
+        _context.Update(genre);
+        await _context.SaveChangesAsync();
+        await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
+        return NoContent();
     }
-    [HttpDelete]
-    public void Delete()
+    [HttpDelete ("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
     {
-        
+        int deletedRecords = await _context.Genres.Where(g => g.Id == id).ExecuteDeleteAsync();
+        if (deletedRecords == 0)
+        { 
+            NotFound();
+        }
+        await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
+        return NoContent();
     }
+    
 }
