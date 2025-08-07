@@ -335,3 +335,6 @@ C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\runtimes\
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0\Azure.Storage.Blobs.dll
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0\Azure.Storage.Common.dll
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0\System.IO.Hashing.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\Azure.Storage.Blobs.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\Azure.Storage.Common.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\System.IO.Hashing.dll

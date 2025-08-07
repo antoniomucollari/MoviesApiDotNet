@@ -11,7 +11,7 @@ using MyDotNet9Api.Utilities;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
-public class ActorsController :ControllerBase 
+public class ActorsController :CustomBaseController 
 {
     private const string cacheTag = "actors";
     private readonly IOutputCacheStore _outputCacheStore;
@@ -19,8 +19,9 @@ public class ActorsController :ControllerBase
     private readonly IMapper _mapper;
     private readonly string container = "actors";
     private readonly IFileStorage _fileStorage;
-
-    public ActorsController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, IMapper mapper, IFileStorage fileStorage)
+  
+    public ActorsController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, 
+        IMapper mapper, IFileStorage fileStorage):base(context, mapper)
     {
         _outputCacheStore = outputCacheStore;
         _context = context;
@@ -34,7 +35,11 @@ public class ActorsController :ControllerBase
     {
         DbSet<Actor> queryable = _context.Actors;
         await HttpContext.InsertPaginationParameterHeader(queryable);
-        return await queryable.OrderBy(g=> g.Name).Paginate(pagination).ProjectTo<ActorDTO>(_mapper.ConfigurationProvider).ToListAsync();
+        return await queryable
+            .OrderBy(g=> g.Name)
+            .Paginate(pagination)
+            .ProjectTo<ActorDTO>(_mapper.ConfigurationProvider)
+            .ToListAsync();
     }
     
     [HttpGet("{id:int}", Name="GetActorById")]
