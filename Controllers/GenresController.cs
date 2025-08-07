@@ -10,14 +10,14 @@ using MyDotNet9Api.Utilities;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
-public class GenreController : ControllerBase
+public class GenresController : ControllerBase
 {
     private const string cacheTag = "genres";
     private readonly IOutputCacheStore _outputCacheStore;
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper; 
 
-    public GenreController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, IMapper mapper)
+    public GenresController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, IMapper mapper)
     {
         _outputCacheStore = outputCacheStore;
         _context = context;
@@ -32,7 +32,7 @@ public class GenreController : ControllerBase
         return await queryable.OrderBy(g=> g.Name).Paginate(pagination).ProjectTo<GenreDTO>(_mapper.ConfigurationProvider).ToListAsync();
     }
     
-    [HttpGet("{id}", Name="GetGenreById")]
+    [HttpGet("{id:int}", Name="GetGenreById")]
     [OutputCache(Tags = [cacheTag])]
     public async Task<ActionResult<GenreDTO>> Get(int id)
     {
@@ -72,16 +72,16 @@ public class GenreController : ControllerBase
         await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
         return NoContent();
     }
-    [HttpDelete ("{id:int}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        int deletedRecords = await _context.Genres.Where(g => g.Id == id).ExecuteDeleteAsync();
-        if (deletedRecords == 0)
-        { 
-            NotFound();
+        [HttpDelete ("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            int deletedRecords = await _context.Genres.Where(g => g.Id == id).ExecuteDeleteAsync();
+            if (deletedRecords == 0)
+            { 
+                NotFound();
+            }
+            await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
+            return NoContent();
         }
-        await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
-        return NoContent();
-    }
     
 }

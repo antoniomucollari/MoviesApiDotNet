@@ -10,4 +10,4 @@ public static class IQuryableExtensions
             .Skip((pagination.Page - 1) * pagination.RecordsPerPage).Take(pagination.RecordsPerPage);
     }
     
-}
+}   

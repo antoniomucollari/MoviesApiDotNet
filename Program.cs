@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyDotNet9Api;
 using MyDotNet9Api.Utilities;
 using AutoMapper;
+using MyDotNet9Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration.GetValue<string>("allowedOrigins")!.Split(",");
@@ -25,6 +26,7 @@ builder.Services.AddOutputCache(options =>
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IFileStorage, AzureFileStorage>();
 var app = builder.Build();
     
 
