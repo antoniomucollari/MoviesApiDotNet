@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using MyDotNet9Api.DTOs;
 using MyDotNet9Api.Entities;
+using NetTopologySuite.Geometries;
 
 namespace MyDotNet9Api.Utilities;
 
 public class AutoMapperProfiles: Profile
 {
-    public AutoMapperProfiles()
+    public AutoMapperProfiles(GeometryFactory geometryFactory)
     {
         ConfigureGenres();
         ConfigureActors();

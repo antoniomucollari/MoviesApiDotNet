@@ -1,7 +1,6 @@
 ﻿namespace MyDotNet9Api.DTOs;
 
-public class GenreDTO : IId
+public interface IId
 {
     public int Id { get; set; }
-    public string Name { get; set; }
 }

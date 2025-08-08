@@ -1,6 +1,6 @@
 ﻿namespace MyDotNet9Api.DTOs;
 
-public class ActorDTO
+public class ActorDTO : IId
 {
     public int Id { get; set; }
     public required string Name { get; set; }

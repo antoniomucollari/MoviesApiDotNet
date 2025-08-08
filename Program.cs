@@ -3,6 +3,8 @@ using MyDotNet9Api;
 using MyDotNet9Api.Utilities;
 using AutoMapper;
 using MyDotNet9Api.Services;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration.GetValue<string>("allowedOrigins")!.Split(",");
@@ -24,12 +26,17 @@ builder.Services.AddOutputCache(options =>
 {
     options.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(60);
 });
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection", sqlserver=> sqlserver.UseNetTopologySuite()));
+builder.Services.AddSingleton<GeometryFactory>(NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326));
+builder.Services.AddSingleton(provider => new MapperConfiguration(config =>
+{
+    var geometryFactory = provider.GetRequiredService<GeometryFactory>();
+    config.AddProfile(new AutoMapperProfiles(geometryFactory));
+}).CreateMapper());
 builder.Services.AddTransient<IFileStorage, AzureFileStorage>();
 var app = builder.Build();
     
-
+ 
 app.UseSwagger();
 app.UseSwaggerUI();
 

@@ -21,7 +21,7 @@ public class ActorsController :CustomBaseController
     private readonly IFileStorage _fileStorage;
   
     public ActorsController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, 
-        IMapper mapper, IFileStorage fileStorage):base(context, mapper)
+        IMapper mapper, IFileStorage fileStorage):base(context, mapper, outputCacheStore, cacheTag)
     {
         _outputCacheStore = outputCacheStore;
         _context = context;
@@ -33,27 +33,14 @@ public class ActorsController :CustomBaseController
     [OutputCache(Tags = [cacheTag])]
     public async Task<List<ActorDTO>> GetAll([FromQuery] PaginationDTO pagination)
     {
-        DbSet<Actor> queryable = _context.Actors;
-        await HttpContext.InsertPaginationParameterHeader(queryable);
-        return await queryable
-            .OrderBy(g=> g.Name)
-            .Paginate(pagination)
-            .ProjectTo<ActorDTO>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+        return await GetAll<Actor, ActorDTO>(pagination,orderBy: a =>a.Name);
     }
     
     [HttpGet("{id:int}", Name="GetActorById")]
     [OutputCache(Tags = [cacheTag])]
     public async Task<ActionResult<ActorDTO>> Get(int id)
     {
-        var actor = await _context.Actors
-            .ProjectTo<ActorDTO>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(g=> g.Id== id);
-        if (actor == null)
-        {
-            return NotFound();
-        }
-        return actor;
+        return await Get<Actor, ActorDTO>(id);
     }
     
     [HttpPost]

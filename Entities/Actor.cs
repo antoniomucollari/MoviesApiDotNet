@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using MyDotNet9Api.DTOs;
 
 namespace MyDotNet9Api.Entities;
 
-public class Actor
+public class Actor : IId
 {
           public int Id { get; set; }
           [Required]
