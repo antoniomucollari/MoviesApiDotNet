@@ -13,7 +13,7 @@ namespace MyDotNet9Api.Controllers;
 [Route("api/[controller]")]
 public class GenresController : CustomBaseController
 {
-        private const string cacheTag = "genres";
+    private const string cacheTag = "genres";
     private readonly IOutputCacheStore _outputCacheStore;
     private readonly ApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -52,10 +52,10 @@ public class GenresController : CustomBaseController
     {
         return await Put<GenreCreationDTO, Genre>(id, genreCreationDTO);
     }
-        [HttpDelete ("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            return await Delete<Genre>(id);
-        }
+    [HttpDelete ("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        return await Delete<Genre>(id);
+    }
     
 }

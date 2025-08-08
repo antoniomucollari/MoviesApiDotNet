@@ -342,3 +342,7 @@ C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0\NetTopologySuite.dll
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\bin\Debug\net9.0\NetTopologySuite.IO.SqlServerBytes.dll
 C:\Users\anton\OneDrive\Desktop\DotNetAPICourse\MoviesApiDotNet\obj\Debug\net9.0\EFCoreSqlServerNetTopologySuite.cs
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\NetTopologySuite.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\bin\Debug\net9.0\NetTopologySuite.IO.SqlServerBytes.dll
+C:\Users\antonio\Desktop\DotNetCourse\MoviesApiDotNet\obj\Debug\net9.0\EFCoreSqlServerNetTopologySuite.cs
