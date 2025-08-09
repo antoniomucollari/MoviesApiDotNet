@@ -63,18 +63,19 @@ public class CustomBaseController: ControllerBase
     }
     
     public async Task<IActionResult> Put<TCreation, TEntity>(int id, TCreation creationDTO)
-    where TEntity:class, IId
+        where TEntity : class, IId
     {
-        var entityExists = await _context.Set<TEntity>().AnyAsync(e => e.Id == id);
-        if (!entityExists)
+        var entity = await _context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id);
+        if (entity == null)
         {
             return NotFound();
         }
-        var entity =  _mapper.Map<TEntity>(creationDTO);
-        entity.Id = id;
-        _context.Update(entity);
+        
+        _mapper.Map(creationDTO, entity); // Map onto existing tracked entity
+
         await _context.SaveChangesAsync();
         await _outputCacheStore.EvictByTagAsync(_cacheTag, CancellationToken.None);
+
         return NoContent();
     }
     
