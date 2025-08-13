@@ -5411,19 +5411,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\antonio\\.nuget\\packages\\": {}
+    "C:\\Users\\anton\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+      "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
       "projectName": "MyDotNet9Api",
-      "projectPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
-      "packagesPath": "C:\\Users\\antonio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\obj\\",
+      "projectPath": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+      "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anton\\OneDrive\\Desktop\\DotNetAPICourse\\MoviesApiDotNet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\antonio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -5499,7 +5499,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\anton\\.dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

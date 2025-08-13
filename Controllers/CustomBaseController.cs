@@ -35,6 +35,16 @@ public class CustomBaseController: ControllerBase
             .ProjectTo<TDTO>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
+    
+    protected async Task<List<TDTO>> GetAllNoPagination<TEntity, TDTO>(Expression<Func<TEntity, object>> orderBy)
+        where TEntity : class
+    {
+        
+        return await _context.Set<TEntity>().AsQueryable()
+            .OrderBy(orderBy)
+            .ProjectTo<TDTO>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
 
     protected async Task<ActionResult<TDTO>> Get<TEntity, TDTO>(int id)
     where TEntity: class
@@ -90,4 +100,6 @@ public class CustomBaseController: ControllerBase
         await _outputCacheStore.EvictByTagAsync(_cacheTag, CancellationToken.None);
         return NoContent();
     }
+        
+    
 }

@@ -42,8 +42,6 @@ public class TheatersController: CustomBaseController
     [HttpPost]
     public async Task<CreatedAtRouteResult> Post([FromBody] TheaterCreationDTO theaterCreationDTO)
     {
-        Console.WriteLine($"Latitude: {theaterCreationDTO.Latitude}");
-        Console.WriteLine($"Longitude: {theaterCreationDTO.Longitude}");
         return await Post<TheaterCreationDTO, Theater, TheaterDTO>(theaterCreationDTO, routName: "GetTheaterById");
     }
     

@@ -43,6 +43,15 @@ public class ActorsController :CustomBaseController
         return await Get<Actor, ActorDTO>(id);
     }
     
+    [HttpGet("search/{name}")]
+    [OutputCache(Tags = [cacheTag])]
+    public async Task<ActionResult<List<MovieActorDTO>>> Get(string name)
+    {
+        return await _context.Actors.Where(a=> a.Name.Contains(name))
+            .ProjectTo<MovieActorDTO>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+    
     [HttpPost]
     public async Task<CreatedAtRouteResult> Post([FromForm] ActorCreationDTO actorCreationDTO)
     {
@@ -54,7 +63,7 @@ public class ActorsController :CustomBaseController
             actor.Picture = url;
         }
         
-        _context.Actors.Add(actor);
+        _context.Actors.Add(actor); 
         await _context.SaveChangesAsync();
         await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
         var actorDTO = _mapper.Map<ActorDTO>(actor);

@@ -34,6 +34,13 @@ public class GenresController : CustomBaseController
         return await GetAll<Genre, GenreDTO>(pagination,orderBy: g =>g.Name);
     }
     
+    [HttpGet("all")]
+    [OutputCache(Tags = [cacheTag])] 
+    public async Task<List<GenreDTO>> Get()
+    {
+        return await GetAllNoPagination<Genre, GenreDTO>(orderBy: g =>g.Name);
+    }
+    
     [HttpGet("{id:int}", Name="GetGenreById")]
     [OutputCache(Tags = [cacheTag])]
     public async Task<ActionResult<GenreDTO>> Get(int id)
