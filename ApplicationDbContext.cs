@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyDotNet9Api.Entities;
 
 namespace MyDotNet9Api;
 
-public class ApplicationDbContext: DbContext
+public class ApplicationDbContext: IdentityDbContext
 {
      public ApplicationDbContext(DbContextOptions options) : base(options)
      {
@@ -12,6 +13,7 @@ public class ApplicationDbContext: DbContext
 
      protected override void OnModelCreating(ModelBuilder modelBuilder)
      {
+          base.OnModelCreating(modelBuilder);
           modelBuilder.Entity<MovieGenre>().HasKey(e=> new { e.GenreId, e.MovieId});
           modelBuilder.Entity<MovieActor>().HasKey(e=> new { e.ActorId, e.MovieId});
           modelBuilder.Entity<MovieTheater>().HasKey(e=> new { e.TheaterId, e.MovieId});
@@ -23,4 +25,5 @@ public class ApplicationDbContext: DbContext
      public DbSet<MovieActor> MoviesActors { get; set; }
      public DbSet<MovieGenre> MoviesGenres { get; set; }
      public DbSet<MovieTheater> MoviesTheaters { get; set; }
+     public DbSet<Rating> MovieRatings { get; set; }
 }

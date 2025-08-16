@@ -1,7 +1,11 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MyDotNet9Api;
 using MyDotNet9Api.Utilities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using MyDotNet9Api.Services;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
@@ -33,7 +37,32 @@ builder.Services.AddSingleton(provider => new MapperConfiguration(config =>
     var geometryFactory = provider.GetRequiredService<GeometryFactory>();
     config.AddProfile(new AutoMapperProfiles(geometryFactory));
 }).CreateMapper());
+
+
+builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<UserManager<IdentityUser>>();
+builder.Services.AddScoped<SignInManager<IdentityUser>>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.MapInboundClaims = false;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["keyjwt"]!)),
+        ClockSkew = TimeSpan.Zero
+    };
+});
 builder.Services.AddTransient<IFileStorage, AzureFileStorage>();
+builder.Services.AddTransient<IUserServices, UserServices>();
 var app = builder.Build();
     
  
