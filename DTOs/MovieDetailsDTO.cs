@@ -10,4 +10,6 @@ public class MovieDetailsDTO
     public string? Trailer { get; set; }
     public DateTime ReleaseDate { get; set; }
     public string? Poster { get; set; }
+    public double AverageVote { get; set; }
+    public int UserVote { get; set; }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,7 @@ using MyDotNet9Api.Utilities;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
+// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class MoviesController :ControllerBase    
 {
     private const string cacheTag = "movies";
@@ -20,10 +23,12 @@ public class MoviesController :ControllerBase
     private readonly IMapper _mapper;
     private readonly string container = "movies";
     private readonly IFileStorage _fileStorage;
-  
+    private readonly IUserServices _userServices;
+
     public MoviesController(IOutputCacheStore outputCacheStore, ApplicationDbContext context, 
-        IMapper mapper, IFileStorage fileStorage) 
+        IMapper mapper, IFileStorage fileStorage, IUserServices userServices) 
     {
+        _userServices = userServices;
         _outputCacheStore = outputCacheStore;
         _context = context;
         _mapper = mapper;
@@ -42,7 +47,7 @@ public class MoviesController :ControllerBase
         // var entityDTO = _mapper.Map<TRead>(entity); 
         // return new CreatedAtRouteResult(routName, new { id = entityDTO.Id }, entityDTO);
     }
-
+    [AllowAnonymous]
     [HttpGet("landing")]
     public async Task<ActionResult<LandingDTO>> Get()
     {
@@ -77,7 +82,6 @@ public class MoviesController :ControllerBase
 
     
     [HttpGet("{id:int}", Name="GetMovieById")]
-    [OutputCache(Tags = [cacheTag])]
     public async Task<ActionResult<MovieDetailsDTO>> Get(int id)
     { 
         var movie = await _context.Movies
@@ -89,7 +93,26 @@ public class MoviesController :ControllerBase
         {
             return NotFound();
         }
+        var averageVote = 0.0;
+        var userVote = 0;
 
+        if (await _context.MovieRatings.AnyAsync(m => m.MovieId == id))
+        {
+            averageVote = await _context.MovieRatings.Where(r => r.MovieId == id).AverageAsync(r => r.Punctuation);
+            if (HttpContext.User.Identity!.IsAuthenticated)
+            {
+                var userId = await _userServices.ObtainUserId();
+                var ratingDB = await _context.MovieRatings.FirstOrDefaultAsync(r=>r.UserId == userId && r.MovieId == id);
+                if (ratingDB is not null)
+                {
+                    userVote = ratingDB.Punctuation;
+                }
+            }
+        }
+
+        movie.AverageVote = averageVote;
+        movie.UserVote = userVote;
+            
         return movie;
     } 
     
