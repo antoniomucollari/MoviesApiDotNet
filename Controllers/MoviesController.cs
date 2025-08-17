@@ -80,7 +80,7 @@ public class MoviesController :ControllerBase
     }
 
 
-    
+    [AllowAnonymous]
     [HttpGet("{id:int}", Name="GetMovieById")]
     public async Task<ActionResult<MovieDetailsDTO>> Get(int id)
     { 
@@ -148,6 +148,7 @@ public class MoviesController :ControllerBase
 
     [HttpGet("putget/{id:int}")]
     [OutputCache(Tags = [cacheTag])]
+    
     public async Task<ActionResult<MoviesPutGetDTO>> PutGet(int id)
     {
         var movie = await _context.Movies
