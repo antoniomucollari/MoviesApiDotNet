@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using MyDotNet9Api.DTOs;
@@ -8,6 +10,7 @@ using MyDotNet9Api.Services;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "isadmin")]
 public class TheatersController: CustomBaseController
 {
     private const string cacheTag = "theaters";

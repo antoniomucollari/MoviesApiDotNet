@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using MyDotNet9Api.Utilities;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "isadmin")]
 public class GenresController : CustomBaseController
 {
     private const string cacheTag = "genres";
@@ -29,12 +32,14 @@ public class GenresController : CustomBaseController
     }
     [HttpGet]
     [OutputCache(Tags = [cacheTag])]
+    [AllowAnonymous]
     public async Task<List<GenreDTO>> Get([FromQuery] PaginationDTO pagination)
     {
         return await GetAll<Genre, GenreDTO>(pagination,orderBy: g =>g.Name);
     }
     
     [HttpGet("all")]
+    [AllowAnonymous]
     [OutputCache(Tags = [cacheTag])] 
     public async Task<List<GenreDTO>> Get()
     {

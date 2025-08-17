@@ -61,6 +61,11 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("isadmin", policy => policy.RequireClaim("isadmin"));
+});
 builder.Services.AddTransient<IFileStorage, AzureFileStorage>();
 builder.Services.AddTransient<IUserServices, UserServices>();
 var app = builder.Build();

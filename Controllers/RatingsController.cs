@@ -8,7 +8,7 @@ using MyDotNet9Api.Services;
 
 namespace MyDotNet9Api.Controllers;
 
-[Route("api/rating")]
+[Route("api/[controller]")] 
 [ApiController]
 public class RatingsController : ControllerBase
 {
@@ -35,14 +35,14 @@ public class RatingsController : ControllerBase
             var rating = new Rating()
             {
                 MovieId = ratingCreationDTO.MovieId,
-                Punctuation = ratingCreationDTO.Punctuation,
+                Punctuation = ratingCreationDTO.Rate,
                 UserId = userId
             };
             _context.Add(rating);
         }
         else
         {
-            actualRating.Punctuation = ratingCreationDTO.Punctuation;
+            actualRating.Punctuation = ratingCreationDTO.Rate;
         }
         await _context.SaveChangesAsync();
         return NoContent();

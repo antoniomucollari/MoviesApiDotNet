@@ -1,10 +1,15 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MyDotNet9Api.DTOs;
+using MyDotNet9Api.Utilities;
 
 namespace MyDotNet9Api.Controllers;
 [Route("api/users")]
@@ -14,16 +19,31 @@ public class UsersController: ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IConfiguration _configuration;
+    private readonly ApplicationDbContext _applicationDbContext;
+    private readonly IMapper _mapper;
 
     public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-        IConfiguration configuration)
+        IConfiguration configuration, ApplicationDbContext applicationDbContext, IMapper mapper)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _configuration = configuration;
+        _applicationDbContext = applicationDbContext;
+        _mapper = mapper;
     }
 
+    [HttpGet("IndexUsers")]
+    public async Task<ActionResult<List<UserDTO>>> IndexUsers([FromQuery] PaginationDTO paginationDto)
+    {
+        var queryable = _applicationDbContext.Users.AsQueryable();
+        await HttpContext.InsertPaginationParameterHeader(queryable);
+        var users = await queryable.ProjectTo<UserDTO>(_mapper.ConfigurationProvider).OrderBy(x => x.Email)
+            .Paginate(paginationDto).ToListAsync();
+        return users;
+    }
+ 
     [HttpPost("register")]
+    [AllowAnonymous]
     public async Task<ActionResult<AuthenticationResponseDTO>> Register(UserCredentialsDTO userCredentialsDTO)
     {
         var user = new IdentityUser
@@ -43,6 +63,7 @@ public class UsersController: ControllerBase
     }
 
     [HttpPost("login")]
+    [AllowAnonymous]
     public async Task<ActionResult<AuthenticationResponseDTO>> Login(UserCredentialsDTO userCredentialsDto)
     {
         var user = await _userManager.FindByEmailAsync(userCredentialsDto.Email);
@@ -95,5 +116,31 @@ public class UsersController: ControllerBase
             Token = token,
             Expiration = expiration
         };
+    }
+
+    [HttpPost("MakeAdmin")]
+    public async Task<IActionResult> MakeAdmin(EditClaimDTO editClaimDto)
+    {
+        var user = await _userManager.FindByEmailAsync(editClaimDto.Email);
+        if (user is null)
+        {
+            return NotFound();
+        }
+
+        await _userManager.AddClaimAsync(user, new Claim("isadmin", "true"));
+        return NoContent();
+    }
+    
+    [HttpPost("RemoveAdmin")]
+    public async Task<IActionResult> RemoveAdmin(EditClaimDTO editClaimDto)
+    {
+        var user = await _userManager.FindByEmailAsync(editClaimDto.Email);
+        if (user is null)
+        {
+            return NotFound();
+        }
+
+        await _userManager.RemoveClaimAsync(user, new Claim("isadmin", "true"));
+        return NoContent();
     }
 }

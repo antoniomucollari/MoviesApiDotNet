@@ -14,7 +14,7 @@ using MyDotNet9Api.Utilities;
 namespace MyDotNet9Api.Controllers;
 [ApiController] 
 [Route("api/[controller]")]
-// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class MoviesController :ControllerBase    
 {
     private const string cacheTag = "movies";
@@ -224,8 +224,8 @@ public class MoviesController :ControllerBase
         await _outputCacheStore.EvictByTagAsync(cacheTag, CancellationToken.None);
         return NoContent();
     }
-
     [HttpGet("filter")]
+    [AllowAnonymous]
     public async Task<ActionResult<List<MovieDTO>>> Filter([FromQuery] MoviesFilterDTO moviesFilterDTO)
     {
         var moviesQueryable = _context.Movies.AsQueryable();
