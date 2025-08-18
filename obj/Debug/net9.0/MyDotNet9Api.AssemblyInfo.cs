@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyDotNet9Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4169a950a1148b9078243ebf7b2939b5382e2ded")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e7b910660c97c2a0c5ba6f102d82621de9a9957")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyDotNet9Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyDotNet9Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -65,6 +65,11 @@ public class ActorsController :CustomBaseController
             var url = await _fileStorage.Store(container, actorCreationDTO.Picture);
             actor.Picture = url;
         }
+        else
+        {
+            actor.Picture =
+                "https://static.vecteezy.com/ti/gratis-vektor/p1/26530349-anonym-person-silhouette-symbol-vektor.jpg";
+        }
         
         _context.Actors.Add(actor); 
         await _context.SaveChangesAsync();
