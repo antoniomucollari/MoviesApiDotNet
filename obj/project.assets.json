@@ -5305,24 +5305,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\antonio\\.nuget\\packages\\": {}
+    "C:\\Users\\anton\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+      "projectUniqueName": "C:\\projects\\MoviesApiDotNet\\MyDotNet9Api.csproj",
       "projectName": "MyDotNet9Api",
-      "projectPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\MyDotNet9Api.csproj",
-      "packagesPath": "C:\\Users\\antonio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\antonio\\Desktop\\DotNetCourse\\MoviesApiDotNet\\obj\\",
+      "projectPath": "C:\\projects\\MoviesApiDotNet\\MyDotNet9Api.csproj",
+      "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\MoviesApiDotNet\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\antonio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5401,7 +5408,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
