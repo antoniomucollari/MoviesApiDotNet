@@ -1,0 +1,2528 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MyDotNet9Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Actors": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActorDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Actors"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Picture": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Picture": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Actors/{id}": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "operationId": "GetActorById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActorDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Actors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 150,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Picture": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "DateOfBirth": {
+                  "style": "form"
+                },
+                "Picture": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Actors"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Actors/search/{name}": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieActorDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieActorDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieActorDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Genres": {
+      "get": {
+        "tags": [
+          "Genres"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Genres"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Genres/all": {
+      "get": {
+        "tags": [
+          "Genres"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenreDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Genres/{id}": {
+      "get": {
+        "tags": [
+          "Genres"
+        ],
+        "operationId": "GetGenreById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenreDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenreDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenreDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Genres"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenreCreationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Genres"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Movies/postget": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPostGetDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPostGetDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPostGetDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Movies/landing": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LandingDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LandingDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LandingDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Movies/{id}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "operationId": "GetMovieById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MovieDetailsDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MovieDetailsDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MovieDetailsDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GenresIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "TheatersIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Actors",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ActorMovieCreationDTO"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Trailer": {
+                    "type": "string"
+                  },
+                  "ReleaseDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Poster": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Title": {
+                  "style": "form"
+                },
+                "Trailer": {
+                  "style": "form"
+                },
+                "ReleaseDate": {
+                  "style": "form"
+                },
+                "Poster": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Movies": {
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "GenresIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "TheatersIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "Actors",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ActorMovieCreationDTO"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  },
+                  "Trailer": {
+                    "type": "string"
+                  },
+                  "ReleaseDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Poster": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Title": {
+                  "style": "form"
+                },
+                "Trailer": {
+                  "style": "form"
+                },
+                "ReleaseDate": {
+                  "style": "form"
+                },
+                "Poster": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Movies/putget/{id}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPutGetDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPutGetDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesPutGetDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Movies/filter": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "GenreId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UpcomingReleases",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "InTheaters",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MovieDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ratings": {
+      "post": {
+        "tags": [
+          "Ratings"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatingCreationDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatingCreationDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RatingCreationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Theaters": {
+      "get": {
+        "tags": [
+          "Theaters"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TheaterDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TheaterDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TheaterDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Theaters"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Theaters/{id}": {
+      "get": {
+        "tags": [
+          "Theaters"
+        ],
+        "operationId": "GetTheaterById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TheaterDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TheaterDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TheaterDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Theaters"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TheaterCreationDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Theaters"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/IndexUsers": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "RecordsPerPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCredentialsDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/MakeAdmin": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/RemoveAdmin": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditClaimDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Actor": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 150,
+            "minLength": 0,
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActorDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActorMovieCreationDTO": {
+        "required": [
+          "character"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "character": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthenticationResponseDTO": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "expiration": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Coordinate": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          },
+          "m": {
+            "type": "number",
+            "format": "double"
+          },
+          "coordinateValue": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoordinateEqualityComparer": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CoordinateSequence": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "measures": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "spatial": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ordinates": {
+            "$ref": "#/components/schemas/Ordinates"
+          },
+          "hasZ": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasM": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "zOrdinateIndex": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "mOrdinateIndex": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "first": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "last": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoordinateSequenceFactory": {
+        "type": "object",
+        "properties": {
+          "ordinates": {
+            "$ref": "#/components/schemas/Ordinates"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dimension": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          -3,
+          -2,
+          -1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EditClaimDTO": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Envelope": {
+        "type": "object",
+        "properties": {
+          "isNull": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "diameter": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minX": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxX": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minY": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxY": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minExtent": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maxExtent": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centre": {
+            "$ref": "#/components/schemas/Coordinate"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Genre": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GenreCreationDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GenreDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Geometry": {
+        "type": "object",
+        "properties": {
+          "factory": {
+            "$ref": "#/components/schemas/GeometryFactory"
+          },
+          "userData": {
+            "nullable": true
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "geometryType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ogcGeometryType": {
+            "$ref": "#/components/schemas/OgcGeometryType"
+          },
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "coordinate": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "numPoints": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "numGeometries": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isSimple": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isEmpty": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centroid": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "interiorPoint": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "pointOnSurface": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "boundary": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "boundaryDimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "envelope": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "envelopeInternal": {
+            "$ref": "#/components/schemas/Envelope"
+          },
+          "isRectangle": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeometryFactory": {
+        "type": "object",
+        "properties": {
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "coordinateSequenceFactory": {
+            "$ref": "#/components/schemas/CoordinateSequenceFactory"
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "geometryServices": {
+            "$ref": "#/components/schemas/NtsGeometryServices"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GeometryOverlay": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LandingDTO": {
+        "type": "object",
+        "properties": {
+          "inTheaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieDTO"
+            },
+            "nullable": true
+          },
+          "upcomingReleases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Movie": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string"
+          },
+          "trailer": {
+            "type": "string",
+            "nullable": true
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "poster": {
+            "type": "string",
+            "nullable": true
+          },
+          "moviesGenres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieGenre"
+            },
+            "nullable": true
+          },
+          "moviesActors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieActor"
+            },
+            "nullable": true
+          },
+          "moviesTheaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieTheater"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieActor": {
+        "required": [
+          "character"
+        ],
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "character": {
+            "maxLength": 300,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "actor": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieActorDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          },
+          "character": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieDTO": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "trailer": {
+            "type": "string",
+            "nullable": true
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "poster": {
+            "type": "string",
+            "nullable": true
+          },
+          "averageVote": {
+            "type": "number",
+            "format": "double"
+          },
+          "userVote": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieDetailsDTO": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "genres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreDTO"
+            },
+            "nullable": true
+          },
+          "theaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheaterDTO"
+            },
+            "nullable": true
+          },
+          "actors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieActorDTO"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "trailer": {
+            "type": "string",
+            "nullable": true
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "poster": {
+            "type": "string",
+            "nullable": true
+          },
+          "averageVote": {
+            "type": "number",
+            "format": "double"
+          },
+          "userVote": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieGenre": {
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "genreId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieTheater": {
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "theaterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "movie": {
+            "$ref": "#/components/schemas/Movie"
+          },
+          "theater": {
+            "$ref": "#/components/schemas/Theater"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MoviesPostGetDTO": {
+        "type": "object",
+        "properties": {
+          "genres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreDTO"
+            },
+            "nullable": true
+          },
+          "theaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheaterDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MoviesPutGetDTO": {
+        "type": "object",
+        "properties": {
+          "movie": {
+            "$ref": "#/components/schemas/MovieDTO"
+          },
+          "selectedGenres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreDTO"
+            },
+            "nullable": true
+          },
+          "nonSelectedGenres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenreDTO"
+            },
+            "nullable": true
+          },
+          "selectedTheaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheaterDTO"
+            },
+            "nullable": true
+          },
+          "nonSelectedTheaters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TheaterDTO"
+            },
+            "nullable": true
+          },
+          "actors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MovieActorDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NtsGeometryServices": {
+        "type": "object",
+        "properties": {
+          "geometryOverlay": {
+            "$ref": "#/components/schemas/GeometryOverlay"
+          },
+          "coordinateEqualityComparer": {
+            "$ref": "#/components/schemas/CoordinateEqualityComparer"
+          },
+          "defaultSRID": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "defaultCoordinateSequenceFactory": {
+            "$ref": "#/components/schemas/CoordinateSequenceFactory"
+          },
+          "defaultPrecisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OgcGeometryType": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Ordinates": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          7,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768,
+          65535,
+          65536,
+          65539,
+          65543,
+          131072,
+          262144,
+          524288,
+          1048576,
+          2097152,
+          4194304,
+          8388608,
+          16777216,
+          33554432,
+          67108864,
+          134217728,
+          268435456,
+          536870912,
+          1073741824,
+          -2147483648,
+          -65536,
+          -1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Point": {
+        "type": "object",
+        "properties": {
+          "factory": {
+            "$ref": "#/components/schemas/GeometryFactory"
+          },
+          "userData": {
+            "nullable": true
+          },
+          "srid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precisionModel": {
+            "$ref": "#/components/schemas/PrecisionModel"
+          },
+          "numGeometries": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isSimple": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "area": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "centroid": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "interiorPoint": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "pointOnSurface": {
+            "$ref": "#/components/schemas/Point"
+          },
+          "envelope": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "envelopeInternal": {
+            "$ref": "#/components/schemas/Envelope"
+          },
+          "isRectangle": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "coordinateSequence": {
+            "$ref": "#/components/schemas/CoordinateSequence"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordinate"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "numPoints": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "isEmpty": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "boundaryDimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "x": {
+            "type": "number",
+            "format": "double"
+          },
+          "y": {
+            "type": "number",
+            "format": "double"
+          },
+          "coordinate": {
+            "$ref": "#/components/schemas/Coordinate"
+          },
+          "geometryType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ogcGeometryType": {
+            "$ref": "#/components/schemas/OgcGeometryType"
+          },
+          "boundary": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "z": {
+            "type": "number",
+            "format": "double"
+          },
+          "m": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrecisionModel": {
+        "type": "object",
+        "properties": {
+          "isFloating": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "maximumSignificantDigits": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "scale": {
+            "type": "number",
+            "format": "double"
+          },
+          "gridSize": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "precisionModelType": {
+            "$ref": "#/components/schemas/PrecisionModels"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrecisionModels": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RatingCreationDTO": {
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rate": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Theater": {
+        "required": [
+          "location",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 75,
+            "minLength": 0,
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Point"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheaterCreationDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 75,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "maximum": 180,
+            "minimum": -180,
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "maximum": 90,
+            "minimum": -90,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TheaterDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserCredentialsDTO": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDTO": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

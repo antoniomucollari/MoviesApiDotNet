@@ -1,0 +1,25 @@
+﻿{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2025-08-17T21:20:03.7179073Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "61b51d07-36f0-4cf6-abcb-03cce1f7c2b2"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "moviesapi"
+    },
+    "mssql1.serviceConnectorResourceGroupName": {
+      "Name": "mssql1.serviceConnectorResourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "moviesapi"
+    }
+  }
+}
